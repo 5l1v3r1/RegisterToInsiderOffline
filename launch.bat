@@ -66,19 +66,19 @@ echo.
 
 call :DEREGISTER_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
 
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v BranchName /t REG_SZ /d %channel% /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v ContentType /t REG_SZ /d Mainline /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v EnablePreviewBuilds /t REG_DWORD /d 1 /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v IsBuildFlightingEnabled /t REG_DWORD /d 1 /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v Ring /t REG_SZ /d External /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v TestFlags /t REG_DWORD /d 32 /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v BranchName /t REG_SZ /d %channel% /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v ContentType /t REG_SZ /d Mainline /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v EnablePreviewBuilds /t REG_DWORD /d 1 /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v IsBuildFlightingEnabled /t REG_DWORD /d 1 /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v Ring /t REG_SZ /d External /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v TestFlags /t REG_DWORD /d 32 /f > nul 2>&1
 
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Strings /v StickyXaml /t REG_SZ /d "<StackPanel xmlns="^""http://schemas.microsoft.com/winfx/2006/xaml/presentation"^""><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"">This device has been registered to the Windows Insider Program. If you want to change which channel you receive your builds from, or if you want to stop receiving builds, please use the batch script.</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,10,0,0"^"" FontSize="^""20"^"">Which channel has this device been registered to?</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,5,0,0"^"">This device has been registered to the <Run FontWeight="^""SemiBold"^"">%name% Channel</Run>.</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,10,0,0"^"" FontSize="^""20"^"">Why am I not receiving builds from my chosen channel?</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,5,0,0"^"">The Windows Insider Program requires you to send <Run FontWeight="^""SemiBold"^"">Optional</Run> diagnostic data. Please check your diagnostic data setting in <Run FontWeight="^""SemiBold"^"">Diagnostics &amp; feedback</Run>.</TextBlock><Button Margin="^""0,10,0,0"^"" Command="^""{StaticResource ActivateUriCommand}"^"" CommandParameter="^""ms-settings:privacy-feedback"^""><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""5,0,5,0"^"">Open Diagnostics &amp; feedback</TextBlock></Button></StackPanel>" /f > nul 2>&1
 
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\UI\Visibility /v UIDisabledElements /t REG_DWORD /d 65535 /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\UI\Visibility /v UIErrorMessageVisibility /t REG_DWORD /d 65535 /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\UI\Visibility /v UIHiddenElements /t REG_DWORD /d 65535 /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\UI\Visibility /v UIServiceDrivenElementVisibility /t REG_DWORD /d 65535 /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility /v UIDisabledElements /t REG_DWORD /d 65535 /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility /v UIErrorMessageVisibility /t REG_DWORD /d 65535 /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility /v UIHiddenElements /t REG_DWORD /d 65535 /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility /v UIServiceDrivenElementVisibility /t REG_DWORD /d 65535 /f > nul 2>&1
 
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\SLS\Programs\RingExternal /v Enabled /t REG_DWORD /d 1 /f > nul 2>&1
 
