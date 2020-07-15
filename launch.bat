@@ -28,6 +28,7 @@ echo 2 - Register this device to the Beta Channel
 echo 3 - Register this device to the Release Preview Channel
 echo.
 echo 4 - Remove this device from the Windows Insider Program
+echo 5 - Quit the batch script
 
 echo.
 set /p option="Choose an option: "
