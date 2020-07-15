@@ -63,6 +63,7 @@ goto :EOF
 :REGISTER_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
 echo This device is being registered to the Windows Insider Program.
 echo.
+
 call :DEREGISTER_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
 
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v BranchName /t REG_SZ /d %getChannel% /f > nul 2>&1
