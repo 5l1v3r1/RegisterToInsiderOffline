@@ -2,13 +2,16 @@
 
 :START_BATCH_SCRIPT
 bcdedit /enum {current} | find "flightsigning" | find "Yes" > nul 2>&1
+
 echo [DEBUG] %ERRORLEVEL% is the error level (0 = "flightsigning" is enabled; 1 = "flightsigning" is disabled)
 
 if %ERRORLEVEL% == 0 (
     echo [DEBUG] "flightsigning" is enabled ^(exists in the boot configuration data store^) on this device.
     echo [DEBUG] Setting the "flightsigning" variable to 1 ^(true^).
     set flightsigning=1
-) else if %ERRORLEVEL% == 1 (
+)
+
+if %ERRORLEVEL% == 1 (
     echo [DEBUG] "flightsigning" is not enabled ^(does not exist in the boot configuration data store^) on this device.
     echo [DEBUG] Setting the "flightsigning" variable to 0 ^(false^).
     set flightsigning=0
@@ -30,15 +33,10 @@ echo.
 set /p option="Choose an option: "
 echo.
 
-if %option% == 1 (
-    goto :REGISTER_DEVICE_TO_THE_DEV_CHANNEL
-) else if %option% == 2 (
-    goto :REGISTER_DEVICE_TO_THE_BETA_CHANNEL
-) else if %option% == 3 (
-    goto :REGISTER_DEVICE_TO_THE_RELEASE_PREVIEW_CHANNEL
-) else if %option% == 4 (
-    goto :REMOVE_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
-)
+if %option% == 1 goto :REGISTER_DEVICE_TO_THE_DEV_CHANNEL
+if %option% == 2 goto :REGISTER_DEVICE_TO_THE_BETA_CHANNEL
+if %option% == 3 goto :REGISTER_DEVICE_TO_THE_RELEASE_PREVIEW_CHANNEL
+if %option% == 4 goto :REMOVE_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
 
 :REGISTER_DEVICE_TO_THE_DEV_CHANNEL
 set getChannel=Dev
@@ -120,9 +118,11 @@ goto :EOF
 set option=
 
 echo This device needs to be rebooted to apply changes.
+echo.
 echo 1 - Yes
 echo 2 - No
-
 echo.
+
 set /p option="Do you want to reboot your device now? "
+if %option% == 1 shutdown /r /t 0
 goto :EOF
