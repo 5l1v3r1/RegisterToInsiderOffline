@@ -41,18 +41,18 @@ if %option% == 4 goto :REMOVE_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
 goto :EOF
 
 :REGISTER_DEVICE_TO_THE_DEV_CHANNEL
-set getChannel=Dev
-set getChannelName=Dev
+set channel=Dev
+set name=Dev
 goto :REGISTER_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
 
 :REGISTER_DEVICE_TO_THE_BETA_CHANNEL
-set getChannel=Beta
-set getChannelName=Beta
+set channel=Beta
+set name=Beta
 goto :REGISTER_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
 
 :REGISTER_DEVICE_TO_THE_RELEASE_PREVIEW_CHANNEL
-set getChannel=ReleasePreview
-set getChannelName=Release Preview
+set channel=ReleasePreview
+set name=Release Preview
 goto :REGISTER_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
 
 :DEREGISTER_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
@@ -66,14 +66,14 @@ echo.
 
 call :DEREGISTER_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
 
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v BranchName /t REG_SZ /d %getChannel% /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v BranchName /t REG_SZ /d %channel% /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v ContentType /t REG_SZ /d Mainline /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v EnablePreviewBuilds /t REG_DWORD /d 1 /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v IsBuildFlightingEnabled /t REG_DWORD /d 1 /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v Ring /t REG_SZ /d External /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\Applicability /v TestFlags /t REG_DWORD /d 32 /f > nul 2>&1
 
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\UI\Strings /v StickyXaml /t REG_SZ /d "<StackPanel xmlns="^""http://schemas.microsoft.com/winfx/2006/xaml/presentation"^""><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"">This device has been registered to the Windows Insider Program. If you want to change which channel you receive your builds from, or if you want to stop receiving builds, please use the batch script.</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,10,0,0"^"" FontSize="^""20"^"">Which channel has this device been registered to?</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,5,0,0"^"">This device has been registered to the <Run FontWeight="^""SemiBold"^"">%getChannelName% Channel</Run>.</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,10,0,0"^"" FontSize="^""20"^"">Why am I not receiving builds from my chosen channel?</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,5,0,0"^"">The Windows Insider Program requires you to send <Run FontWeight="^""SemiBold"^"">Optional</Run> diagnostic data. Please check your diagnostic data setting in <Run FontWeight="^""SemiBold"^"">Diagnostics &amp; feedback</Run>.</TextBlock><Button Margin="^""0,10,0,0"^"" Command="^""{StaticResource ActivateUriCommand}"^"" CommandParameter="^""ms-settings:privacy-feedback"^""><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""5,0,5,0"^"">Open Diagnostics &amp; feedback</TextBlock></Button></StackPanel>" /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\UI\Strings /v StickyXaml /t REG_SZ /d "<StackPanel xmlns="^""http://schemas.microsoft.com/winfx/2006/xaml/presentation"^""><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"">This device has been registered to the Windows Insider Program. If you want to change which channel you receive your builds from, or if you want to stop receiving builds, please use the batch script.</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,10,0,0"^"" FontSize="^""20"^"">Which channel has this device been registered to?</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,5,0,0"^"">This device has been registered to the <Run FontWeight="^""SemiBold"^"">%name% Channel</Run>.</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,10,0,0"^"" FontSize="^""20"^"">Why am I not receiving builds from my chosen channel?</TextBlock><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""0,5,0,0"^"">The Windows Insider Program requires you to send <Run FontWeight="^""SemiBold"^"">Optional</Run> diagnostic data. Please check your diagnostic data setting in <Run FontWeight="^""SemiBold"^"">Diagnostics &amp; feedback</Run>.</TextBlock><Button Margin="^""0,10,0,0"^"" Command="^""{StaticResource ActivateUriCommand}"^"" CommandParameter="^""ms-settings:privacy-feedback"^""><TextBlock Style="^""{StaticResource BodyTextBlockStyle}"^"" Margin="^""5,0,5,0"^"">Open Diagnostics &amp; feedback</TextBlock></Button></StackPanel>" /f > nul 2>&1
 
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\UI\Visibility /v UIDisabledElements /t REG_DWORD /d 65535 /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfhost\UI\Visibility /v UIErrorMessageVisibility /t REG_DWORD /d 65535 /f > nul 2>&1
