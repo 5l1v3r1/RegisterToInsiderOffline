@@ -117,7 +117,7 @@ goto :EOF
 :ASK_FOR_REBOOT
 set option=
 
-echo This device needs to be rebooted to apply changes.
+echo This device needs to be rebooted to apply the changes you have made.
 echo.
 echo 1 - Yes
 echo 2 - No
