@@ -38,6 +38,8 @@ if %option% == 2 goto :REGISTER_DEVICE_TO_THE_BETA_CHANNEL
 if %option% == 3 goto :REGISTER_DEVICE_TO_THE_RELEASE_PREVIEW_CHANNEL
 if %option% == 4 goto :REMOVE_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
 
+goto :EOF
+
 :REGISTER_DEVICE_TO_THE_DEV_CHANNEL
 set getChannel=Dev
 set getChannelName=Dev
