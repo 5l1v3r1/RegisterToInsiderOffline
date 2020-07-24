@@ -70,7 +70,6 @@ call :DEREGISTER_THIS_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
 
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v BranchName /t REG_SZ /d %FriendlyChannelName% /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v ContentType /t REG_SZ /d Mainline /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v EnablePreviewBuilds /t REG_DWORD /d 2 /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v IsBuildFlightingEnabled /t REG_DWORD /d 1 /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v Ring /t REG_SZ /d External /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v TestFlags /t REG_DWORD /d 32 /f > nul 2>&1
