@@ -1,6 +1,6 @@
 @echo off
 
-:START_BATCH_SCRIPT
+:START_OF_THE_BATCH_FILE
 bcdedit /enum {current} | findstr "flightsigning *Yes" > nul 2>&1
 
 echo [DEBUG] %ERRORLEVEL% is the error level (0 = "flightsigning" is enabled; 1 = "flightsigning" is disabled)
@@ -28,7 +28,7 @@ echo 2 - Register this device to the Beta Channel
 echo 3 - Register this device to the Release Preview Channel
 echo.
 echo 4 - Remove this device from the Windows Insider Program
-echo 5 - Close this batch script
+echo 5 - Close this batch file
 
 echo.
 set /p option="Choose an option: "
