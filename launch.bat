@@ -28,48 +28,49 @@ echo 2 - Register this device to the Beta Channel
 echo 3 - Register this device to the Release Preview Channel
 echo.
 echo 4 - Remove this device from the Windows Insider Program
-echo 5 - Quit the batch script
+echo 5 - Close this batch script
 
 echo.
 set /p option="Choose an option: "
 echo.
 
-if %option% == 1 goto :REGISTER_DEVICE_TO_THE_DEV_CHANNEL
-if %option% == 2 goto :REGISTER_DEVICE_TO_THE_BETA_CHANNEL
-if %option% == 3 goto :REGISTER_DEVICE_TO_THE_RELEASE_PREVIEW_CHANNEL
-if %option% == 4 goto :REMOVE_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
+if %option% == 1 goto :REGISTER_THIS_DEVICE_TO_THE_DEV_CHANNEL
+if %option% == 2 goto :REGISTER_THIS_DEVICE_TO_THE_BETA_CHANNEL
+if %option% == 3 goto :REGISTER_THIS_DEVICE_TO_THE_RELEASE_PREVIEW_CHANNEL
+if %option% == 4 goto :REMOVE_THIS_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
+if %option% == 5 goto :EOF
 
-goto :EOF
+goto :MAIN_MENU
 
-:REGISTER_DEVICE_TO_THE_DEV_CHANNEL
-set channel=Dev
-set name=Dev
-goto :REGISTER_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
+:REGISTER_THIS_DEVICE_TO_THE_DEV_CHANNEL
+set ChannelName=Dev
+set FriendlyChannelName=Dev
+goto :REGISTER_THIS_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
 
-:REGISTER_DEVICE_TO_THE_BETA_CHANNEL
-set channel=Beta
-set name=Beta
-goto :REGISTER_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
+:REGISTER_THIS_DEVICE_TO_THE_BETA_CHANNEL
+set ChannelName=Beta
+set FriendlyChannelName=Beta
+goto :REGISTER_THIS_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
 
-:REGISTER_DEVICE_TO_THE_RELEASE_PREVIEW_CHANNEL
-set channel=ReleasePreview
-set name=Release Preview
-goto :REGISTER_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
+:REGISTER_THIS_DEVICE_TO_THE_RELEASE_PREVIEW_CHANNEL
+set ChannelName=ReleasePreview
+set FriendlyChannelName=Release Preview
+goto :REGISTER_THIS_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
 
-:DEREGISTER_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
+:DEREGISTER_THIS_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
 reg delete HKLM\SOFTWARE\Microsoft\WindowsSelfHost /f > nul 2>&1
 reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\SLS\Programs /f > nul 2>&1
 goto :EOF
 
-:REGISTER_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
-echo This device is being registered to the Windows Insider Program.
+:REGISTER_THIS_DEVICE_TO_THE_WINDOWS_INSIDER_PROGRAM
+echo You are registering this device to the Windows Insider Program.
 echo.
 
-call :DEREGISTER_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
+call :DEREGISTER_THIS_DEVICE_FROM_THE_WINDOWS_INSIDER_PROGRAM
 
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v BranchName /t REG_SZ /d %channel% /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v BranchName /t REG_SZ /d %FriendlyChannelName% /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v ContentType /t REG_SZ /d Mainline /f > nul 2>&1
-reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v EnablePreviewBuilds /t REG_DWORD /d 1 /f > nul 2>&1
+reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v EnablePreviewBuilds /t REG_DWORD /d 2 /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v IsBuildFlightingEnabled /t REG_DWORD /d 1 /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v Ring /t REG_SZ /d External /f > nul 2>&1
 reg add HKLM\SOFTWARE\Microsoft\WindowsSelfHost\Applicability /v TestFlags /t REG_DWORD /d 32 /f > nul 2>&1
@@ -93,7 +94,7 @@ if %flightsigning% == 0 (
 echo You have registered this device to the Windows Insider Program.
 echo.
 
-if %flightsigning% == 0 goto :ASK_FOR_REBOOT
+if %flightsigning% == 0 goto :ASK_THE_USER_IF_THEY_WANT_TO_REBOOT_THIS_DEVICE
 pause
 goto :EOF
 
@@ -113,19 +114,21 @@ if %flightsigning% == 1 (
 echo You have removed this device from the Windows Insider Program.
 echo.
 
-if %flightsigning% == 1 goto :ASK_FOR_REBOOT
+if %flightsigning% == 1 goto :ASK_THE_USER_IF_THEY_WANT_TO_REBOOT_THIS_DEVICE
 pause
 goto :EOF
 
-:ASK_FOR_REBOOT
+:ASK_THE_USER_IF_THEY_WANT_TO_REBOOT_THIS_DEVICE
 set option=
 
-echo This device needs to be rebooted to apply the changes you have made.
+echo This device needs to be rebooted to apply the changes you have made to this device.
 echo.
 echo 1 - Yes
 echo 2 - No
 echo.
 
-set /p option="Do you want to reboot your device now? "
+set /p option="Do you want to reboot this device now, or later? "
 if %option% == 1 shutdown /r /t 0
-goto :EOF
+if %option% == 2 goto :EOF
+
+goto :ASK_THE_USER_IF_THEY_WANT_TO_REBOOT_THEIR_DEVICE
