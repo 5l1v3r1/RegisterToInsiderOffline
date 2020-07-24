@@ -131,4 +131,4 @@ set /p option="Do you want to reboot this device now, or later? "
 if %option% == 1 shutdown /r /t 0
 if %option% == 2 goto :EOF
 
-goto :ASK_THE_USER_IF_THEY_WANT_TO_REBOOT_THEIR_DEVICE
+goto :ASK_THE_USER_IF_THEY_WANT_TO_REBOOT_THIS_DEVICE
